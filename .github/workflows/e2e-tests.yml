@@ -39,12 +39,14 @@ jobs:
         env:
           # Brak klucza → mock AI service (fallback wbudowany w aplikację)
           OPENAI_API_KEY: ""
+          JWT_SECRET_KEY: "ci-test-secret"
 
       - name: Run unit tests
         working-directory: backend
         run: pytest --tb=short -v
         env:
           OPENAI_API_KEY: ""
+          JWT_SECRET_KEY: "ci-test-secret"
 
   # ──────────────────────────────────────────────────────────────
   # JOB 2: Frontend build (todo_workshop_frontend)
@@ -127,6 +129,7 @@ jobs:
         run: alembic upgrade head
         env:
           OPENAI_API_KEY: ""
+          JWT_SECRET_KEY: "ci-test-secret"
 
       - name: Start backend server
         working-directory: backend
@@ -135,6 +138,7 @@ jobs:
           echo "Backend PID: $!"
         env:
           OPENAI_API_KEY: ""
+          JWT_SECRET_KEY: "ci-test-secret"
 
       - name: Wait for backend to be ready
         run: |
